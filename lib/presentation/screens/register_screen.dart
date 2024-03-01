@@ -92,7 +92,7 @@ class _RegisterFormState extends State<_RegisterForm> {
             validator: (value) {
               if ( value == null || value.isEmpty ) return 'Campo requerido';
               if ( value.trim().isEmpty ) return 'Campo requerido';
-              if ( value.length < 6 ) return 'Más de 6 letras';
+              
               return null;
             },
           ),
