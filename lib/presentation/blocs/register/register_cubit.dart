@@ -1,5 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_forms/infrastructure/inputs/Username.dart';
+// import 'package:flutter_forms/infrastructure/inputs/Username.dart';
+import 'package:flutter_forms/infrastructure/inputs/inputs.dart';
+import 'package:formz/formz.dart';
 
 part 'register_state.dart';
 
@@ -8,56 +12,55 @@ class RegisterCubit extends Cubit<RegisterFormState> {
 
 
   void onSubmit() {
-    // emit(
-    //   state.copyWith(
-    //     formStatus: FormStatus.validating,
-    //     username: Username.dirty( state.username.value ),
-    //     password: Password.dirty( state.password.value ),
-    //     email: Email.dirty( state.email.value ),
+    emit(
+      state.copyWith(
+        formStatus: FormStatus.validating,
+        username: Username.dirty( state.username.value ),
+        password: Password.dirty( state.password.value ),
+        email: Email.dirty( state.email.value ),
 
-    //     isValid: Formz.validate([
-    //       state.username, 
-    //       state.password,
-    //       // TODO: state.email
-    //     ])
-    //   )
-    // );
+        isValid: Formz.validate([
+          state.username, 
+          state.password,
+          state.email
+        ])
+      )
+    );
 
 
 
-    print('Cubit Submit: $state');
+    print('Cubit Submit 3: $state');
   }
 
 
 
 
   void usernameChanged( String value ) {
-    // final username = Username.dirty(value);
+    final username = Username.dirty(value);
     emit(
       state.copyWith(
-        username: value//username,
-        // isValid: Formz.validate([ username, state.password, state.email ])
+        username: username,
+        isValid: Formz.validate([ username , state.password, state.email])
       )
     );
   }
 
   void emailChanged( String value ) {
-    // final email = Email.dirty(value);
+    final email = Email.dirty(value);
     emit(
       state.copyWith(
-        email: value//email,
-        // isValid: Formz.validate([ email, state.password, state.username ])
+        email: email,
+        isValid: Formz.validate([ email, state.password, state.username ])
       )
     );
   }
 
   void passwordChanged( String value ) {
-    // final password = Password.dirty(value);
+    final password = Password.dirty(value);
     emit(
       state.copyWith(
-        password: value//password,
-        // isValid: Formz.validate([ password, state.username, state.email ])
-      )
+        password: password,
+        isValid: Formz.validate([ password,  state.username, state.email ])      )
     );
   }
 
